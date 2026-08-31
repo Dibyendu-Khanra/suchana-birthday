@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>For My Love ❤️</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
 
     <link rel="stylesheet" href="./style.css">
 </head>
@@ -22,10 +29,25 @@
 
 
     <!-- =========================
+         MUSIC BUTTON
+    ========================== -->
+
+    <button
+        id="musicButton"
+        class="music-button"
+        type="button"
+        aria-label="Toggle music">
+
+        🎵 Music
+
+    </button>
+
+
+    <!-- =========================
          FLOATING HEARTS
     ========================== -->
 
-    <div class="hearts">
+    <div class="hearts" aria-hidden="true">
         <span>❤️</span>
         <span>💕</span>
         <span>💗</span>
@@ -36,10 +58,10 @@
 
 
     <!-- =========================
-         WELCOME SECTION
+         WELCOME
     ========================== -->
 
-    <section class="welcome" id="welcome">
+    <section class="page welcome active" id="welcome">
 
         <div class="welcome-content">
 
@@ -56,14 +78,12 @@
                 >
 
                 <div class="photo-placeholder">
-
                     ❤️
 
                     <small>
                         Add your photo as<br>
                         <b>images/main.jpg</b>
                     </small>
-
                 </div>
 
             </div>
@@ -78,7 +98,7 @@
                 something made with all my heart.
             </p>
 
-            <button id="startButton">
+            <button id="startButton" type="button">
                 Open My Surprise 🎁
             </button>
 
@@ -91,7 +111,7 @@
          OUR STORY
     ========================== -->
 
-    <section class="story-section" id="story">
+    <section class="page story-section" id="story">
 
         <div class="story-content">
 
@@ -185,7 +205,7 @@
          MEMORIES
     ========================== -->
 
-    <section class="memories-section" id="memories">
+    <section class="page memories-section" id="memories">
 
         <div class="memories-content">
 
@@ -207,7 +227,6 @@
             <!-- PHOTO GALLERY -->
 
             <div class="photo-gallery">
-
 
                 <div class="gallery-item">
 
@@ -278,7 +297,6 @@
 
                 </div>
 
-
             </div>
 
 
@@ -288,24 +306,24 @@
 
             <div
                 class="photo-lightbox"
-                id="photoLightbox">
+                id="photoLightbox"
+                aria-hidden="true">
 
                 <button
                     class="close-lightbox"
                     id="closeLightbox"
-                    type="button">
+                    type="button"
+                    aria-label="Close image">
 
                     ✕
 
                 </button>
-
 
                 <img
                     id="lightboxImage"
                     src=""
                     alt="Selected memory"
                 >
-
 
                 <p id="lightboxCaption"></p>
 
@@ -330,9 +348,7 @@
          BIRTHDAY
     ========================== -->
 
-    <section
-        class="birthday-section"
-        id="birthday">
+    <section class="page birthday-section" id="birthday">
 
         <div class="birthday-content">
 
@@ -366,29 +382,15 @@
                     <div class="candles">
 
                         <div class="candle">
-
-                            <div class="flame">
-                                🔥
-                            </div>
-
+                            <div class="flame">🔥</div>
                         </div>
 
-
                         <div class="candle">
-
-                            <div class="flame">
-                                🔥
-                            </div>
-
+                            <div class="flame">🔥</div>
                         </div>
 
-
                         <div class="candle">
-
-                            <div class="flame">
-                                🔥
-                            </div>
-
+                            <div class="flame">🔥</div>
                         </div>
 
                     </div>
@@ -399,17 +401,9 @@
 
                     <div class="cake-body">
 
-                        <div class="cake-decoration">
-                            💕
-                        </div>
-
-                        <div class="cake-decoration">
-                            ❤️
-                        </div>
-
-                        <div class="cake-decoration">
-                            💕
-                        </div>
+                        <div class="cake-decoration">💕</div>
+                        <div class="cake-decoration">❤️</div>
+                        <div class="cake-decoration">💕</div>
 
                     </div>
 
@@ -423,6 +417,7 @@
 
             <p class="wish-text">
                 Close your eyes...
+                <br>
                 make a wish... ✨
             </p>
 
@@ -445,6 +440,17 @@
 
             </div>
 
+
+            <button
+                class="next-button birthday-next"
+                id="letterButton"
+                type="button"
+                disabled>
+
+                Continue to My Letter 💌
+
+            </button>
+
         </div>
 
     </section>
@@ -454,9 +460,7 @@
          LOVE LETTER
     ========================== -->
 
-    <section
-        class="letter-section"
-        id="letter">
+    <section class="page letter-section" id="letter">
 
         <div class="letter-content">
 
@@ -565,13 +569,9 @@
                     </p>
 
                     <p class="letter-ending">
-
                         With all my love,
-
                         <br>
-
                         Yours forever ❤️
-
                     </p>
 
                 </div>
@@ -580,9 +580,10 @@
 
 
             <button
-                class="next-button"
+                class="next-button final-next"
                 id="finalButton"
-                type="button">
+                type="button"
+                disabled>
 
                 One Last Surprise ❤️
 
@@ -597,9 +598,7 @@
          FINAL SURPRISE
     ========================== -->
 
-    <section
-        class="final-section"
-        id="final">
+    <section class="page final-section" id="final">
 
         <div class="final-content">
 
@@ -617,7 +616,10 @@
                 Suchana ❤️
             </h2>
 
-            <p class="final-message" id="finalMessage"></p>
+            <p
+                class="final-message"
+                id="finalMessage">
+            </p>
 
             <div class="big-heart">
                 ❤️
@@ -641,12 +643,7 @@
     </section>
 
 
-    <!-- =========================
-         JAVASCRIPT
-    ========================== -->
-
     <script src="./script.js"></script>
 
 </body>
-
 </html>
