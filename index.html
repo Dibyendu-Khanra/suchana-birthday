@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>For My Love ❤️</title>
+
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+    <!-- =========================
+         BACKGROUND MUSIC
+    ========================== -->
+
+    <audio id="loveSong" loop preload="auto">
+        <source src="./music/song.mp3" type="audio/mpeg">
+    </audio>
+
+
+    <!-- =========================
+         FLOATING HEARTS
+    ========================== -->
+
+    <div class="hearts">
+        <span>❤️</span>
+        <span>💕</span>
+        <span>💗</span>
+        <span>💖</span>
+        <span>❤️</span>
+        <span>💞</span>
+    </div>
+
+
+    <!-- =========================
+         WELCOME SECTION
+    ========================== -->
+
+    <section class="welcome" id="welcome">
+
+        <div class="welcome-content">
+
+            <p class="small-text">
+                ✨ I made something special for you ✨
+            </p>
+
+            <div class="photo-frame">
+
+                <img
+                    src="./images/main.jpg"
+                    alt="Our Photo"
+                    onerror="this.style.display='none'; document.querySelector('.photo-placeholder').style.display='flex';"
+                >
+
+                <div class="photo-placeholder">
+
+                    ❤️
+
+                    <small>
+                        Add your photo as<br>
+                        <b>images/main.jpg</b>
+                    </small>
+
+                </div>
+
+            </div>
+
+            <h1>
+                Hey Suchana <span>❤️</span>
+            </h1>
+
+            <p class="intro-text">
+                I have a little surprise for you...
+                <br>
+                something made with all my heart.
+            </p>
+
+            <button id="startButton">
+                Open My Surprise 🎁
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         OUR STORY
+    ========================== -->
+
+    <section class="story-section" id="story">
+
+        <div class="story-content">
+
+            <p class="section-label">
+                💖 OUR STORY 💖
+            </p>
+
+            <h2>
+                Our Little Story
+            </h2>
+
+            <p class="story-intro">
+                Every beautiful story has a beginning...
+                <br>
+                and I'm grateful that ours began. ❤️
+            </p>
+
+
+            <div class="story-card">
+
+                <div class="story-heart">
+                    ❤️
+                </div>
+
+                <h3>
+                    The Day We Met ❤️
+                </h3>
+
+                <p>
+                    I still remember the day we first met.
+                    I didn't know that moment would become
+                    the beginning of something so beautiful.
+                </p>
+
+            </div>
+
+
+            <div class="story-card">
+
+                <div class="story-heart">
+                    🥰
+                </div>
+
+                <h3>
+                    My Favorite Memory 🥰
+                </h3>
+
+                <p>
+                    Out of all the moments we've shared,
+                    there are some memories that I wish
+                    I could live again and again.
+                </p>
+
+            </div>
+
+
+            <div class="story-card">
+
+                <div class="story-heart">
+                    💕
+                </div>
+
+                <h3>
+                    Why I Love You 💕
+                </h3>
+
+                <p>
+                    I love your smile, your little habits,
+                    your kindness, and the way you make
+                    even ordinary days feel special.
+                </p>
+
+            </div>
+
+
+            <button
+                class="next-button"
+                id="memoryButton"
+                type="button">
+
+                See Our Memories 📸
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         MEMORIES
+    ========================== -->
+
+    <section class="memories-section" id="memories">
+
+        <div class="memories-content">
+
+            <p class="section-label">
+                📸 OUR MEMORIES 📸
+            </p>
+
+            <h2>
+                Moments With You
+            </h2>
+
+            <p class="memories-intro">
+                Some moments become memories...
+                <br>
+                and some memories become forever. ❤️
+            </p>
+
+
+            <!-- PHOTO GALLERY -->
+
+            <div class="photo-gallery">
+
+
+                <div class="gallery-item">
+
+                    <img
+                        src="./images/photo1.jpg"
+                        alt="Beautiful memory 1"
+                    >
+
+                    <div class="photo-caption">
+                        ❤️ You look absolutely beautiful
+                    </div>
+
+                </div>
+
+
+                <div class="gallery-item">
+
+                    <img
+                        src="./images/photo2.jpg"
+                        alt="Beautiful memory 2"
+                    >
+
+                    <div class="photo-caption">
+                        🥰 That beautiful smile I adore
+                    </div>
+
+                </div>
+
+
+                <div class="gallery-item">
+
+                    <img
+                        src="./images/photo3.jpg"
+                        alt="Our favorite moment"
+                    >
+
+                    <div class="photo-caption">
+                        💕 One of my favorite moments with you
+                    </div>
+
+                </div>
+
+
+                <div class="gallery-item">
+
+                    <img
+                        src="./images/photo4.jpg"
+                        alt="Beautiful memory 4"
+                    >
+
+                    <div class="photo-caption">
+                        🌹 My beautiful girl
+                    </div>
+
+                </div>
+
+
+                <div class="gallery-item">
+
+                    <img
+                        src="./images/photo5.jpg"
+                        alt="A special memory"
+                    >
+
+                    <div class="photo-caption">
+                        ❤️ A memory I'll never forget
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =========================
+                 PHOTO LIGHTBOX
+            ========================== -->
+
+            <div
+                class="photo-lightbox"
+                id="photoLightbox">
+
+                <button
+                    class="close-lightbox"
+                    id="closeLightbox"
+                    type="button">
+
+                    ✕
+
+                </button>
+
+
+                <img
+                    id="lightboxImage"
+                    src=""
+                    alt="Selected memory"
+                >
+
+
+                <p id="lightboxCaption"></p>
+
+            </div>
+
+
+            <button
+                class="next-button"
+                id="birthdayButton"
+                type="button">
+
+                Continue to Your Birthday 🎂
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         BIRTHDAY
+    ========================== -->
+
+    <section
+        class="birthday-section"
+        id="birthday">
+
+        <div class="birthday-content">
+
+            <p class="section-label">
+                🎉 TODAY IS YOUR DAY 🎉
+            </p>
+
+            <h2>
+                Happy Birthday
+            </h2>
+
+            <h3>
+                My Beautiful Girl ❤️
+            </h3>
+
+            <p class="birthday-message">
+                Today is all about celebrating you.
+                <br>
+                The beautiful person who makes my world brighter.
+                <br>
+                I hope your birthday is as amazing as you are. 💕
+            </p>
+
+
+            <!-- CAKE -->
+
+            <div class="cake-area">
+
+                <div class="cake">
+
+                    <div class="candles">
+
+                        <div class="candle">
+
+                            <div class="flame">
+                                🔥
+                            </div>
+
+                        </div>
+
+
+                        <div class="candle">
+
+                            <div class="flame">
+                                🔥
+                            </div>
+
+                        </div>
+
+
+                        <div class="candle">
+
+                            <div class="flame">
+                                🔥
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="cake-top"></div>
+
+
+                    <div class="cake-body">
+
+                        <div class="cake-decoration">
+                            💕
+                        </div>
+
+                        <div class="cake-decoration">
+                            ❤️
+                        </div>
+
+                        <div class="cake-decoration">
+                            💕
+                        </div>
+
+                    </div>
+
+
+                    <div class="cake-bottom"></div>
+
+                </div>
+
+            </div>
+
+
+            <p class="wish-text">
+                Close your eyes...
+                make a wish... ✨
+            </p>
+
+
+            <button
+                class="wish-button"
+                id="wishButton"
+                type="button">
+
+                Make a Wish ✨
+
+            </button>
+
+
+            <div
+                id="birthdayMessage"
+                class="birthday-result">
+
+                🎉 Happy Birthday, My Love! 🎉
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         LOVE LETTER
+    ========================== -->
+
+    <section
+        class="letter-section"
+        id="letter">
+
+        <div class="letter-content">
+
+            <p class="section-label">
+                💌 A LETTER FOR YOU 💌
+            </p>
+
+            <h2>
+                For My Love
+            </h2>
+
+
+            <!-- ENVELOPE -->
+
+            <div
+                class="envelope"
+                id="envelope">
+
+                <div class="envelope-top"></div>
+
+                <div class="envelope-body">
+
+                    <div class="letter-icon">
+                        💌
+                    </div>
+
+                    <p>
+                        I wrote something special for you...
+                    </p>
+
+                    <button
+                        class="open-letter-button"
+                        id="openLetterButton"
+                        type="button">
+
+                        Open My Letter 💌
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- ACTUAL LETTER -->
+
+            <div
+                class="love-letter"
+                id="loveLetter">
+
+                <div class="letter-paper">
+
+                    <p class="letter-date">
+                        On your special day ❤️
+                    </p>
+
+                    <h3>
+                        My Dearest Love,
+                    </h3>
+
+                    <p>
+                        Happy Birthday, my love. ❤️
+                    </p>
+
+                    <p>
+                        Today is your special day, but honestly,
+                        I feel like I'm the lucky one because
+                        I get to have you in my life.
+                    </p>
+
+                    <p>
+                        There are so many things I love about you —
+                        your smile, your voice, your little habits,
+                        the way you care, and simply the way
+                        you make my ordinary days feel special.
+                    </p>
+
+                    <p>
+                        Thank you for all the beautiful moments,
+                        all the laughs, all the memories,
+                        and for being someone who means
+                        so much to me.
+                    </p>
+
+                    <p>
+                        I may not always know the perfect words
+                        to express how I feel, but I hope you
+                        always know that you are incredibly
+                        special to me.
+                    </p>
+
+                    <p>
+                        On your birthday, I wish you happiness,
+                        success, peace, and everything your heart
+                        desires.
+                    </p>
+
+                    <p>
+                        And most importantly, I hope we continue
+                        making beautiful memories together. ❤️
+                    </p>
+
+                    <p>
+                        Happy Birthday once again, beautiful.
+                        I love you more than words can say. ❤️
+                    </p>
+
+                    <p class="letter-ending">
+
+                        With all my love,
+
+                        <br>
+
+                        Yours forever ❤️
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="next-button"
+                id="finalButton"
+                type="button">
+
+                One Last Surprise ❤️
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         FINAL SURPRISE
+    ========================== -->
+
+    <section
+        class="final-section"
+        id="final">
+
+        <div class="final-content">
+
+            <div class="final-hearts">
+                ❤️ 💕 💖 💕 ❤️
+            </div>
+
+            <p class="section-label">
+                ✨ ONE LAST THING ✨
+            </p>
+
+            <h2>
+                Happy Birthday,
+                <br>
+                Suchana ❤️
+            </h2>
+
+            <p class="final-message" id="finalMessage"></p>
+
+            <div class="big-heart">
+                ❤️
+            </div>
+
+            <p class="forever-text">
+                Here's to you,
+                <br>
+                to us,
+                <br>
+                and to all the beautiful memories
+                we haven't made yet. 💕
+            </p>
+
+            <div class="final-signature">
+                With all my heart ❤️
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script src="./script.js"></script>
+
+</body>
+
+</html>
