@@ -1,373 +1,567 @@
-/* =========================
-   ELEMENTS
-========================= */
+document.addEventListener("DOMContentLoaded", function () {
 
-const startButton = document.getElementById("startButton");
-const storySection = document.getElementById("story");
+    /* =====================================================
+       GET ALL SECTIONS
+    ===================================================== */
 
-const memoryButton = document.getElementById("memoryButton");
-const memoriesSection = document.getElementById("memories");
+    const sections = document.querySelectorAll("section");
 
-const birthdayButton = document.getElementById("birthdayButton");
-const birthdaySection = document.getElementById("birthday");
-
-const wishButton = document.getElementById("wishButton");
-const birthdayMessage = document.getElementById("birthdayMessage");
-
-const openLetterButton = document.getElementById("openLetterButton");
-const envelope = document.getElementById("envelope");
-const loveLetter = document.getElementById("loveLetter");
-
-const finalButton = document.getElementById("finalButton");
-const finalSection = document.getElementById("final");
-
-const loveSong = document.getElementById("loveSong");
+    const welcomeSection = document.getElementById("welcome");
+    const storySection = document.getElementById("story");
+    const memoriesSection = document.getElementById("memories");
+    const birthdaySection = document.getElementById("birthday");
+    const letterSection = document.getElementById("letter");
+    const finalSection = document.getElementById("final");
 
 
-/* =========================
-   OPEN SURPRISE + MUSIC
-========================= */
+    /* =====================================================
+       BUTTONS
+    ===================================================== */
 
-startButton.addEventListener("click", function () {
+    const startButton = document.getElementById("startButton");
+    const memoryButton = document.getElementById("memoryButton");
+    const birthdayButton = document.getElementById("birthdayButton");
+    const wishButton = document.getElementById("wishButton");
+    const openLetterButton = document.getElementById("openLetterButton");
+    const finalButton = document.getElementById("finalButton");
 
-    // Start music after user's click
-    if (loveSong) {
-        loveSong.volume = 0.7;
 
-        loveSong.play()
-            .then(() => {
-                console.log("Music started ❤️");
-            })
-            .catch((error) => {
-                console.log("Music could not start:", error);
-            });
-    }
+    /* =====================================================
+       MUSIC
+    ===================================================== */
 
-    startButton.innerHTML = "Let's begin... ❤️";
-    startButton.disabled = true;
+    const loveSong = document.getElementById("loveSong");
 
-    setTimeout(function () {
 
-        storySection.scrollIntoView({
-            behavior: "smooth"
+    /* =====================================================
+       SHOW ONLY ONE PAGE
+    ===================================================== */
+
+    function showPage(page) {
+
+        if (!page) return;
+
+        sections.forEach(function (section) {
+
+            section.style.display = "none";
+
+            section.classList.remove("active");
+
         });
 
-        startButton.disabled = false;
-        startButton.innerHTML = "Open My Surprise 🎁";
 
-    }, 700);
+        page.style.display = "flex";
 
-});
+        page.classList.add("active");
 
 
-/* =========================
-   MEMORIES
-========================= */
+        /* Start from top of the new page */
 
-memoryButton.addEventListener("click", function () {
+        page.scrollTop = 0;
 
-    memoriesSection.scrollIntoView({
-        behavior: "smooth"
-    });
+        window.scrollTo({
+            top: 0,
+            behavior: "instant"
+        });
 
-});
-
-
-/* =========================
-   BIRTHDAY
-========================= */
-
-birthdayButton.addEventListener("click", function () {
-
-    birthdaySection.scrollIntoView({
-        behavior: "smooth"
-    });
-
-});
+    }
 
 
-/* =========================
-   MAKE A WISH + BLOW CANDLES
-========================= */
+    /* =====================================================
+       START WITH WELCOME PAGE
+    ===================================================== */
 
-wishButton.addEventListener("click", function () {
-
-    // Turn off all candle flames
-    const flames = document.querySelectorAll(".flame");
-
-    flames.forEach(function (flame) {
-
-        flame.style.opacity = "0";
-
-        flame.style.transform =
-            "scale(0) translateY(-20px)";
-
-    });
+    showPage(welcomeSection);
 
 
-    // Change button
-    wishButton.innerHTML =
-        "Wish Made! 🎂❤️";
+    /* =====================================================
+       OPEN MY SURPRISE
+    ===================================================== */
 
-    wishButton.disabled = true;
+    if (startButton) {
 
+        startButton.addEventListener("click", function () {
 
-    // Show birthday message
-    setTimeout(function () {
+            startButton.innerHTML = "Let's begin... ❤️";
 
-        birthdayMessage.style.display =
-            "block";
-
-        createConfetti();
-
-    }, 500);
-
-});
+            startButton.disabled = true;
 
 
-/* =========================
-   CONFETTI
-========================= */
+            /* Start music after user interaction */
 
-function createConfetti() {
+            if (loveSong) {
 
-    for (let i = 0; i < 80; i++) {
+                loveSong.play()
+                    .then(function () {
 
-        const confetti = document.createElement("div");
+                        console.log("Music started ❤️");
 
-        confetti.innerHTML =
-            ["❤️", "💕", "💖", "✨", "🎉"][
-                Math.floor(Math.random() * 5)
-            ];
+                    })
+                    .catch(function (error) {
 
-        confetti.style.position = "fixed";
-        confetti.style.left = Math.random() * 100 + "vw";
-        confetti.style.top = "-30px";
-        confetti.style.fontSize =
-            (15 + Math.random() * 20) + "px";
+                        console.log(
+                            "Music could not start:",
+                            error
+                        );
 
-        confetti.style.zIndex = "9999";
-        confetti.style.pointerEvents = "none";
+                    });
 
-        document.body.appendChild(confetti);
-
-        const duration =
-            2000 + Math.random() * 2500;
-
-        confetti.animate(
-            [
-                {
-                    transform:
-                        "translateY(0) rotate(0deg)",
-                    opacity: 1
-                },
-                {
-                    transform:
-                        `translateY(110vh) rotate(${Math.random() * 720}deg)`,
-                    opacity: 0
-                }
-            ],
-            {
-                duration: duration,
-                easing: "ease-out"
             }
-        );
 
-        setTimeout(() => {
-            confetti.remove();
-        }, duration);
+
+            setTimeout(function () {
+
+                showPage(storySection);
+
+                startButton.disabled = false;
+
+                startButton.innerHTML =
+                    "Open My Surprise 🎁";
+
+            }, 500);
+
+        });
 
     }
 
-}
+
+    /* =====================================================
+       STORY → MEMORIES
+    ===================================================== */
+
+    if (memoryButton) {
+
+        memoryButton.addEventListener("click", function () {
+
+            showPage(memoriesSection);
+
+        });
+
+    }
 
 
-/* =========================
-   LOVE LETTER
-========================= */
+    /* =====================================================
+       MEMORIES → BIRTHDAY
+    ===================================================== */
 
-openLetterButton.addEventListener("click", function () {
+    if (birthdayButton) {
 
-    envelope.classList.add("open");
+        birthdayButton.addEventListener("click", function () {
 
-    openLetterButton.innerHTML =
-        "Opening... 💕";
+            showPage(birthdaySection);
 
-    openLetterButton.disabled = true;
+        });
 
-    setTimeout(function () {
-
-        envelope.style.display = "none";
-        loveLetter.style.display = "block";
-
-    }, 800);
-
-});
+    }
 
 
-/* =========================
-   FINAL SURPRISE
-========================= */
+    /* =====================================================
+       MAKE A WISH
+    ===================================================== */
 
-finalButton.addEventListener("click", function () {
-
-    finalSection.scrollIntoView({
-        behavior: "smooth"
-    });
-
-    setTimeout(function () {
-
-        typeFinalMessage();
-
-        createConfetti();
-
-    }, 800);
-
-});
-/* =========================
-   PHOTO LIGHTBOX
-========================= */
-
-const galleryImages =
-    document.querySelectorAll(".gallery-item img");
-
-const photoLightbox =
-    document.getElementById("photoLightbox");
-
-const lightboxImage =
-    document.getElementById("lightboxImage");
-
-const lightboxCaption =
-    document.getElementById("lightboxCaption");
-
-const closeLightbox =
-    document.getElementById("closeLightbox");
+    const birthdayMessage =
+        document.getElementById("birthdayMessage");
 
 
-galleryImages.forEach(function (image) {
+    if (wishButton) {
 
-    image.addEventListener("click", function () {
+        wishButton.addEventListener("click", function () {
 
-        lightboxImage.src =
-            image.src;
+            wishButton.innerHTML =
+                "Wish made! ❤️";
 
-        const caption =
-            image.parentElement.querySelector(
-                ".photo-caption"
+            wishButton.disabled = true;
+
+
+            if (birthdayMessage) {
+
+                birthdayMessage.style.display = "block";
+
+            }
+
+
+            createConfetti();
+
+        });
+
+    }
+
+
+    /* =====================================================
+       CONFETTI / FLOATING EMOJIS
+    ===================================================== */
+
+    function createConfetti() {
+
+        const emojis = [
+            "❤️",
+            "💕",
+            "💖",
+            "✨",
+            "🎉",
+            "💗",
+            "🥰"
+        ];
+
+
+        for (let i = 0; i < 80; i++) {
+
+            const confetti =
+                document.createElement("div");
+
+
+            confetti.innerHTML =
+                emojis[
+                    Math.floor(
+                        Math.random() * emojis.length
+                    )
+                ];
+
+
+            confetti.style.position = "fixed";
+
+            confetti.style.left =
+                Math.random() * 100 + "vw";
+
+            confetti.style.top = "-30px";
+
+            confetti.style.fontSize =
+                (15 + Math.random() * 20) + "px";
+
+            confetti.style.zIndex = "99999";
+
+            confetti.style.pointerEvents = "none";
+
+
+            document.body.appendChild(confetti);
+
+
+            const duration =
+                2000 + Math.random() * 2500;
+
+
+            const rotation =
+                Math.random() * 720;
+
+
+            confetti.animate(
+
+                [
+                    {
+                        transform:
+                            "translateY(0) rotate(0deg)",
+
+                        opacity: 1
+                    },
+
+                    {
+                        transform:
+                            `translateY(110vh) rotate(${rotation}deg)`,
+
+                        opacity: 0
+                    }
+                ],
+
+                {
+                    duration: duration,
+
+                    easing: "ease-out",
+
+                    fill: "forwards"
+                }
+
             );
 
-        if (caption) {
 
-            lightboxCaption.innerHTML =
-                caption.innerHTML;
+            setTimeout(function () {
+
+                confetti.remove();
+
+            }, duration);
 
         }
 
-        photoLightbox.classList.add(
-            "show"
+    }
+
+
+    /* =====================================================
+       PHOTO LIGHTBOX
+    ===================================================== */
+
+    const photoLightbox =
+        document.getElementById("photoLightbox");
+
+    const lightboxImage =
+        document.getElementById("lightboxImage");
+
+    const lightboxCaption =
+        document.getElementById("lightboxCaption");
+
+    const closeLightbox =
+        document.getElementById("closeLightbox");
+
+
+    const galleryImages =
+        document.querySelectorAll(
+            ".gallery-item img"
         );
 
-    });
 
-});
+    galleryImages.forEach(function (image) {
 
+        image.addEventListener("click", function () {
 
-/* Close button */
-
-closeLightbox.addEventListener(
-    "click",
-    function () {
-
-        photoLightbox.classList.remove(
-            "show"
-        );
-
-    }
-);
+            if (!photoLightbox) return;
 
 
-/* Click outside photo */
-
-photoLightbox.addEventListener(
-    "click",
-    function (event) {
-
-        if (
-            event.target ===
-            photoLightbox
-        ) {
-
-            photoLightbox.classList.remove(
-                "show"
-            );
-
-        }
-
-    }
-);
+            lightboxImage.src =
+                image.src;
 
 
-/* ESC key */
+            const caption =
+                image.parentElement.querySelector(
+                    ".photo-caption"
+                );
 
-document.addEventListener(
-    "keydown",
-    function (event) {
 
-        if (event.key === "Escape") {
+            if (caption) {
 
-            photoLightbox.classList.remove(
-                "show"
-            );
-
-        }
-
-    }
-);
-/* =========================
-   FINAL TYPEWRITER EFFECT
-========================= */
-
-const finalMessage =
-    document.getElementById("finalMessage");
-
-const finalText =
-    "Suchana... ❤️\nYou are one of the most beautiful parts of my life.\nI hope you always remember how special you are to me.\nHappy Birthday, my love. 💕";
-
-let typingStarted = false;
-
-function typeFinalMessage() {
-
-    if (typingStarted) return;
-
-    typingStarted = true;
-
-    let index = 0;
-
-    finalMessage.innerHTML = "";
-
-    function type() {
-
-        if (index < finalText.length) {
-
-            if (finalText[index] === "\n") {
-
-                finalMessage.innerHTML += "<br>";
+                lightboxCaption.innerHTML =
+                    caption.innerHTML;
 
             } else {
 
-                finalMessage.innerHTML +=
-                    finalText[index];
+                lightboxCaption.innerHTML =
+                    image.alt;
 
             }
 
-            index++;
 
-            setTimeout(type, 45);
+            photoLightbox.style.display =
+                "flex";
 
-        }
+        });
+
+    });
+
+
+    /* Close lightbox */
+
+    if (closeLightbox) {
+
+        closeLightbox.addEventListener(
+            "click",
+            function () {
+
+                photoLightbox.style.display =
+                    "none";
+
+            }
+        );
 
     }
 
-    type();
 
-}
+    /* Click outside image to close */
+
+    if (photoLightbox) {
+
+        photoLightbox.addEventListener(
+            "click",
+            function (event) {
+
+                if (
+                    event.target === photoLightbox
+                ) {
+
+                    photoLightbox.style.display =
+                        "none";
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       LOVE LETTER
+    ===================================================== */
+
+    const envelope =
+        document.getElementById("envelope");
+
+    const loveLetter =
+        document.getElementById("loveLetter");
+
+
+    if (openLetterButton) {
+
+        openLetterButton.addEventListener(
+            "click",
+            function () {
+
+                if (envelope) {
+
+                    envelope.classList.add("open");
+
+                }
+
+
+                openLetterButton.innerHTML =
+                    "Opening... 💕";
+
+
+                openLetterButton.disabled =
+                    true;
+
+
+                setTimeout(function () {
+
+                    if (envelope) {
+
+                        envelope.style.display =
+                            "none";
+
+                    }
+
+
+                    if (loveLetter) {
+
+                        loveLetter.style.display =
+                            "block";
+
+                    }
+
+                }, 800);
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       LETTER → FINAL SURPRISE
+    ===================================================== */
+
+    if (finalButton) {
+
+        finalButton.addEventListener(
+            "click",
+            function () {
+
+                showPage(finalSection);
+
+
+                setTimeout(function () {
+
+                    typeFinalMessage();
+
+                    createConfetti();
+
+                }, 700);
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       FINAL TYPEWRITER MESSAGE
+    ===================================================== */
+
+    const finalMessage =
+        document.getElementById("finalMessage");
+
+
+    const finalText =
+        "Suchana... ❤️\n" +
+        "You are one of the most beautiful parts of my life.\n" +
+        "I hope you always remember how special you are to me.\n" +
+        "Happy Birthday, my love. 💕";
+
+
+    let typingStarted = false;
+
+
+    function typeFinalMessage() {
+
+        if (!finalMessage) return;
+
+        if (typingStarted) return;
+
+        typingStarted = true;
+
+
+        let index = 0;
+
+
+        finalMessage.innerHTML = "";
+
+
+        function type() {
+
+            if (index < finalText.length) {
+
+                if (finalText[index] === "\n") {
+
+                    finalMessage.innerHTML +=
+                        "<br>";
+
+                } else {
+
+                    finalMessage.innerHTML +=
+                        finalText[index];
+
+                }
+
+
+                index++;
+
+
+                setTimeout(type, 45);
+
+            }
+
+        }
+
+
+        type();
+
+    }
+
+
+    /* =====================================================
+       ESCAPE KEY CLOSES PHOTO
+    ===================================================== */
+
+    document.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (
+                event.key === "Escape" &&
+                photoLightbox
+            ) {
+
+                photoLightbox.style.display =
+                    "none";
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       LOG
+    ===================================================== */
+
+    console.log(
+        "❤️ Suchana Birthday Website loaded successfully!"
+    );
+
+});
