@@ -1881,3 +1881,38 @@ button:disabled{opacity:.75;cursor:default}
     }
 
 }
+/* =========================
+   PAGE-BY-PAGE MODE
+========================= */
+
+section {
+    display: none;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+section.welcome {
+    display: flex;
+}
+
+/* Active page */
+section.active {
+    display: flex;
+}
+
+/* Prevent normal page scrolling */
+html,
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+
+/* Each page fills the screen */
+section {
+    width: 100%;
+    height: 100vh;
+    overflow-y: auto;
+}
