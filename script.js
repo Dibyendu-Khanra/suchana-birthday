@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     /* =====================================================
-       GET ALL SECTIONS
+       GET SECTIONS
     ===================================================== */
 
-    const sections = document.querySelectorAll("section");
+    const sections = document.querySelectorAll(".page");
 
     const welcomeSection = document.getElementById("welcome");
     const storySection = document.getElementById("story");
@@ -21,20 +21,32 @@ document.addEventListener("DOMContentLoaded", function () {
     const startButton = document.getElementById("startButton");
     const memoryButton = document.getElementById("memoryButton");
     const birthdayButton = document.getElementById("birthdayButton");
+
     const wishButton = document.getElementById("wishButton");
-    const openLetterButton = document.getElementById("openLetterButton");
-    const finalButton = document.getElementById("finalButton");
+    const letterButton = document.getElementById("letterButton");
+
+    const openLetterButton =
+        document.getElementById("openLetterButton");
+
+    const finalButton =
+        document.getElementById("finalButton");
 
 
     /* =====================================================
        MUSIC
     ===================================================== */
 
-    const loveSong = document.getElementById("loveSong");
+    const loveSong =
+        document.getElementById("loveSong");
+
+    const musicButton =
+        document.getElementById("musicButton");
+
+    let musicPlaying = false;
 
 
     /* =====================================================
-       SHOW ONLY ONE PAGE
+       SHOW PAGE
     ===================================================== */
 
     function showPage(page) {
@@ -43,58 +55,56 @@ document.addEventListener("DOMContentLoaded", function () {
 
         sections.forEach(function (section) {
 
-            section.style.display = "none";
-
             section.classList.remove("active");
 
         });
 
-
-        page.style.display = "flex";
-
         page.classList.add("active");
-
-
-        /* Start from top of the new page */
 
         page.scrollTop = 0;
 
-        window.scrollTo({
-            top: 0,
-            behavior: "instant"
-        });
+        /* Update URL hash without reloading */
+        history.replaceState(null, "", "#" + page.id);
 
     }
 
 
     /* =====================================================
-       START WITH WELCOME PAGE
+       START PAGE
     ===================================================== */
 
     showPage(welcomeSection);
 
 
     /* =====================================================
-       OPEN MY SURPRISE
+       START SURPRISE
     ===================================================== */
 
     if (startButton) {
 
         startButton.addEventListener("click", function () {
 
-            startButton.innerHTML = "Let's begin... ❤️";
+            startButton.innerHTML =
+                "Let's begin... ❤️";
 
             startButton.disabled = true;
 
 
-            /* Start music after user interaction */
+            /* Start music */
 
             if (loveSong) {
+
+                loveSong.volume = 0.5;
 
                 loveSong.play()
                     .then(function () {
 
-                        console.log("Music started ❤️");
+                        musicPlaying = true;
+
+                        if (musicButton) {
+                            musicButton.innerHTML =
+                                "🔊 Music On";
+                        }
 
                     })
                     .catch(function (error) {
@@ -156,16 +166,33 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =====================================================
-       MAKE A WISH
+       BIRTHDAY WISH
     ===================================================== */
 
     const birthdayMessage =
         document.getElementById("birthdayMessage");
 
 
+    const flames =
+        document.querySelectorAll(".flame");
+
+
     if (wishButton) {
 
         wishButton.addEventListener("click", function () {
+
+            /* Turn off candles */
+
+            flames.forEach(function (flame, index) {
+
+                setTimeout(function () {
+
+                    flame.classList.add("off");
+
+                }, index * 180);
+
+            });
+
 
             wishButton.innerHTML =
                 "Wish made! ❤️";
@@ -173,14 +200,41 @@ document.addEventListener("DOMContentLoaded", function () {
             wishButton.disabled = true;
 
 
-            if (birthdayMessage) {
+            setTimeout(function () {
 
-                birthdayMessage.style.display = "block";
+                if (birthdayMessage) {
 
-            }
+                    birthdayMessage.style.display =
+                        "block";
+
+                }
+
+                createConfetti();
+
+                /* Enable letter button */
+
+                if (letterButton) {
+
+                    letterButton.disabled = false;
+
+                }
+
+            }, 700);
+
+        });
+
+    }
 
 
-            createConfetti();
+    /* =====================================================
+       BIRTHDAY → LETTER
+    ===================================================== */
+
+    if (letterButton) {
+
+        letterButton.addEventListener("click", function () {
+
+            showPage(letterSection);
 
         });
 
@@ -318,6 +372,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 image.src;
 
 
+            lightboxImage.alt =
+                image.alt;
+
+
             const caption =
                 image.parentElement.querySelector(
                     ".photo-caption"
@@ -331,38 +389,53 @@ document.addEventListener("DOMContentLoaded", function () {
 
             } else {
 
-                lightboxCaption.innerHTML =
+                lightboxCaption.textContent =
                     image.alt;
 
             }
 
 
-            photoLightbox.style.display =
-                "flex";
+            photoLightbox.classList.add("show");
+
+            photoLightbox.setAttribute(
+                "aria-hidden",
+                "false"
+            );
 
         });
 
     });
 
 
-    /* Close lightbox */
+    /* =====================================================
+       CLOSE LIGHTBOX
+    ===================================================== */
+
+    function closePhotoLightbox() {
+
+        if (!photoLightbox) return;
+
+        photoLightbox.classList.remove("show");
+
+        photoLightbox.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+        lightboxImage.src = "";
+
+    }
+
 
     if (closeLightbox) {
 
         closeLightbox.addEventListener(
             "click",
-            function () {
-
-                photoLightbox.style.display =
-                    "none";
-
-            }
+            closePhotoLightbox
         );
 
     }
 
-
-    /* Click outside image to close */
 
     if (photoLightbox) {
 
@@ -374,8 +447,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     event.target === photoLightbox
                 ) {
 
-                    photoLightbox.style.display =
-                        "none";
+                    closePhotoLightbox();
 
                 }
 
@@ -412,7 +484,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 openLetterButton.innerHTML =
                     "Opening... 💕";
 
-
                 openLetterButton.disabled =
                     true;
 
@@ -434,7 +505,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     }
 
-                }, 800);
+
+                    /* Enable final surprise */
+
+                    if (finalButton) {
+
+                        finalButton.disabled = false;
+
+                    }
+
+                }, 850);
 
             }
         );
@@ -455,13 +535,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 showPage(finalSection);
 
 
+                /* Start typewriter */
+
                 setTimeout(function () {
 
                     typeFinalMessage();
 
                     createConfetti();
 
-                }, 700);
+                }, 500);
 
             }
         );
@@ -470,7 +552,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =====================================================
-       FINAL TYPEWRITER MESSAGE
+       FINAL TYPEWRITER
     ===================================================== */
 
     const finalMessage =
@@ -504,27 +586,27 @@ document.addEventListener("DOMContentLoaded", function () {
 
         function type() {
 
-            if (index < finalText.length) {
-
-                if (finalText[index] === "\n") {
-
-                    finalMessage.innerHTML +=
-                        "<br>";
-
-                } else {
-
-                    finalMessage.innerHTML +=
-                        finalText[index];
-
-                }
+            if (index >= finalText.length) {
+                return;
+            }
 
 
-                index++;
+            if (finalText[index] === "\n") {
 
+                finalMessage.innerHTML +=
+                    "<br>";
 
-                setTimeout(type, 45);
+            } else {
+
+                finalMessage.innerHTML +=
+                    finalText[index];
 
             }
+
+
+            index++;
+
+            setTimeout(type, 45);
 
         }
 
@@ -535,20 +617,66 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =====================================================
-       ESCAPE KEY CLOSES PHOTO
+       MUSIC TOGGLE
+    ===================================================== */
+
+    if (musicButton) {
+
+        musicButton.addEventListener(
+            "click",
+            function () {
+
+                if (!loveSong) return;
+
+
+                if (musicPlaying) {
+
+                    loveSong.pause();
+
+                    musicPlaying = false;
+
+                    musicButton.innerHTML =
+                        "🔇 Music Off";
+
+                } else {
+
+                    loveSong.play()
+                        .then(function () {
+
+                            musicPlaying = true;
+
+                            musicButton.innerHTML =
+                                "🔊 Music On";
+
+                        })
+                        .catch(function (error) {
+
+                            console.log(
+                                "Music error:",
+                                error
+                            );
+
+                        });
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       ESCAPE KEY
     ===================================================== */
 
     document.addEventListener(
         "keydown",
         function (event) {
 
-            if (
-                event.key === "Escape" &&
-                photoLightbox
-            ) {
+            if (event.key === "Escape") {
 
-                photoLightbox.style.display =
-                    "none";
+                closePhotoLightbox();
 
             }
 
